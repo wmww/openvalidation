@@ -22,6 +22,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
 public class OpenValidationApplication implements CommandLineRunner {
@@ -29,9 +31,14 @@ public class OpenValidationApplication implements CommandLineRunner {
   @Autowired private OpenValidationController controller;
 
   @Override
-  public void run(String... args) throws Exception {}
+  public void run(String... args) {}
 
   public static void main(String[] args) {
     SpringApplication.run(OpenValidationApplication.class, args);
+  }
+
+  @EventListener(ApplicationReadyEvent.class)
+  public void logStartingOfApplication() {
+    System.out.println("Started REST-API");
   }
 }
