@@ -82,11 +82,8 @@ public abstract class TransformerBase<
     return builder;
   }
 
-  public ASTOperandBase createProperty(String content) {
+  public static ASTOperandBase createProperty(DataPropertyBase property, String content) {
     ASTOperandBase operand = null;
-
-    DataPropertyBase property = this.factoryCntx.resolveProperty(content);
-
     if (property instanceof DataProperty) {
       operand = new ASTOperandProperty(((DataProperty) property).getFullNameAsParts());
       operand.setDataType(property.getType());
@@ -124,8 +121,13 @@ public abstract class TransformerBase<
       operand.setSource(content);
       operand.setDataType(DataPropertyType.Array);
     }
-
     return operand;
+  }
+
+  public ASTOperandBase createProperty(String content) {
+    DataPropertyBase property = this.factoryCntx.resolveProperty(content);
+
+    return createProperty(property, content);
   }
 
   public TModel postprocess(TModel model) {
