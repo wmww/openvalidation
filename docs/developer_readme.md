@@ -8,7 +8,7 @@ Maven 3.4 or newer
 
 ```bash
 # clone the repo:
-git clone https://github.com/openvalidation/openvalidation/`
+git clone https://github.com/openvalidation/openvalidation/
 # switch to the checkout
 cd openvalidation
 # compile and test the sources
